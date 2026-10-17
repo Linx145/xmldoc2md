@@ -9,16 +9,16 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceFolder}/out/XMLDoc2Markdown/xmldoc2md.dll",
+            "program": "${workspaceFolder}/src/XMLDoc2Markdown/bin/Debug/net10.0/xmldoc2md.exe",
             "args": [
-                "${workspaceFolder}/out/sample/MyClassLib.dll",
-                "--output",
-                "${workspaceFolder}/docs/sample",
-                "--examples-path",
-                "${workspaceFolder}/sample/docs/examples",
-                "--back-button"
+                "${workspaceFolder}/../EternityWorks/src/Bindings/CSharp/EternityWorks/bin/Debug/EternityWorks.dll",
+                "-o",
+                "${workspaceFolder}/../eternity-works-docs/api-reference",
+                "--structure",
+                "tree",
+                "--ignore-bindgen-imports"
             ],
-            "cwd": "${workspaceFolder}/src/XMLDoc2Markdown",
+            "cwd": "${workspaceFolder}/src/XMLDoc2Markdown/bin/Debug/net10.0",
             "console": "internalConsole",
             "stopAtEntry": false
         }

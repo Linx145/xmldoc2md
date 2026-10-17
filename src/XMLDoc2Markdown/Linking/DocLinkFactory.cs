@@ -203,7 +203,7 @@ internal static class DocLinkFactory
     {
         string url = type.GetDocsFileName(structure);
         if (!noExtension) url += ".md";
-        if (!noPrefix) url = "./" + url;
+        if (!noPrefix) url = "./api-reference/" + url;
         return url;
     }
 

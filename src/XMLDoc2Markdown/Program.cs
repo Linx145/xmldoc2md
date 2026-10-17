@@ -90,21 +90,27 @@ internal class Program
             Description = "Extra front matter 'key=value' pair, merged on top of the preset (repeatable). Value emitted verbatim."
         };
 
+        Option<bool> ignoreBindgenImportsOption = new("--ignore-bindgen-imports")
+        {
+            Description = "Exclude bindgen-generated native import files"
+        };
+
         RootCommand rootCommand = new(description: "Tool to generate markdown from C# XML documentation.")
-{
-    srcArgument,
-    outputOption,
-    indexPageNameOption,
-    examplesPathOption,
-    platformOption,
-    linkExtensionOption,
-    linkPrefixOption,
-    backButtonOption,
-    memberAccessibilityLevelOption,
-    structureOption,
-    frontMatterOption,
-    frontMatterFieldOption
-};
+        {
+            srcArgument,
+            outputOption,
+            indexPageNameOption,
+            examplesPathOption,
+            platformOption,
+            linkExtensionOption,
+            linkPrefixOption,
+            backButtonOption,
+            memberAccessibilityLevelOption,
+            structureOption,
+            frontMatterOption,
+            frontMatterFieldOption,
+            ignoreBindgenImportsOption
+        };
 
         rootCommand.SetAction(parseResult =>
         {
@@ -137,6 +143,7 @@ internal class Program
                     "relative" => false,
                     _ => null,
                 };
+                bool ignoreBindgenImports = parseResult.GetValue(ignoreBindgenImportsOption);
                 FrontMatterPreset? frontMatter = parseResult.GetValue(frontMatterOption) switch
                 {
                     "none" => FrontMatterPreset.None,
@@ -197,6 +204,7 @@ internal class Program
                     .Where(type => type is not null)
                     .Select(type => type!)
                     .Where(type => (type.IsPublic || type.IsNestedPublic) && !typeof(Delegate).IsAssignableFrom(type));
+                
                 IEnumerable<IGrouping<string?, Type>> typesByNamespace = types.GroupBy(type => type.Namespace).OrderBy(g => g.Key);
                 foreach (IGrouping<string?, Type> namespaceTypes in typesByNamespace)
                 {
@@ -204,6 +212,11 @@ internal class Program
 
                     foreach (Type type in namespaceTypes.OrderBy(x => x.Name))
                     {
+                        if (ignoreBindgenImports && (type.Name.EndsWith("Imports") || type.Name == "ModuleLoadFuncs"))
+                        {
+                            continue;
+                        }
+
                         string fileName = type.GetDocsFileName(options.Structure);
                         Logger.Info($"  {fileName}.md");
 
