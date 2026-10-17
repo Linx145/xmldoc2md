@@ -2,6 +2,7 @@ using System.Reflection;
 using System.Xml.Linq;
 using Markdown;
 using XMLDoc2Markdown.Linking;
+using System;
 
 namespace XMLDoc2Markdown.Rendering;
 

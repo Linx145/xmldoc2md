@@ -1,6 +1,9 @@
 using System.Reflection;
 using Markdown;
 
+using System;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering;
 
 internal static class ObsoleteRenderer

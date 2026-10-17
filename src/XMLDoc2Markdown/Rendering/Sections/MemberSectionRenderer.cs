@@ -5,6 +5,11 @@ using XMLDoc2Markdown.Signatures;
 using XMLDoc2Markdown.Utils;
 using XMLDoc2Markdown.XmlDocId;
 
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering.Sections;
 
 /// <summary>

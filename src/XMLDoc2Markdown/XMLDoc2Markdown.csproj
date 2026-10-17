@@ -9,7 +9,7 @@
     <PackAsTool>true</PackAsTool>
     <IsPackable>true</IsPackable>
     <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <ImplicitUsings>disable</ImplicitUsings>
     
     <Authors>Charles de Vandière</Authors>
     <Copyright>© 2026 Charles de Vandière</Copyright>

@@ -1,4 +1,5 @@
 namespace XMLDoc2Markdown.Signatures.Modifiers;
+using System;
 
 internal static class ReturnTypeModifier
 {

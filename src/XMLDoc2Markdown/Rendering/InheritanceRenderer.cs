@@ -2,6 +2,10 @@ using System.Reflection;
 using Markdown;
 using XMLDoc2Markdown.Signatures;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering;
 
 internal static class InheritanceRenderer

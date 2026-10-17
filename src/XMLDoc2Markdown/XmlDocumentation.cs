@@ -1,6 +1,10 @@
 using System.Reflection;
 using System.Xml.Linq;
 using XMLDoc2Markdown.XmlDocId;
+using System;
+using System.IO;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XMLDoc2Markdown;
 

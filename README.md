@@ -1,10 +1,6 @@
 # XMLDoc2Markdown
 
-Tool to generate markdown from C# XML documentation.
-
-[![Build Status](https://github.com/charlesdevandiere/xmldoc2md/actions/workflows/ci.yml/badge.svg)](https://github.com/charlesdevandiere/xmldoc2md/actions/workflows/ci.yml)
-[![Nuget](https://img.shields.io/nuget/v/XMLDoc2Markdown.svg?color=blue&logo=nuget)](https://www.nuget.org/packages/XMLDoc2Markdown)
-[![Downloads](https://img.shields.io/nuget/dt/XMLDoc2Markdown.svg?logo=nuget)](https://www.nuget.org/packages/XMLDoc2Markdown)
+Tool to generate markdown from C# XML documentation. This fork is modified to better work with the needs of Eternity Works and other Clouds Of Eternity projects.
 
 ## How to use
 

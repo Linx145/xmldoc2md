@@ -1,4 +1,5 @@
 using System.Reflection;
+using System.Linq;
 
 namespace XMLDoc2Markdown.Signatures.Modifiers;
 

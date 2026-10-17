@@ -3,6 +3,9 @@ using System.Text;
 using System.Xml.Linq;
 using Markdown;
 
+using System;
+using System.Collections.Generic;
+
 namespace XMLDoc2Markdown.Rendering.Sections;
 
 internal sealed class EnumFieldsTableRenderer

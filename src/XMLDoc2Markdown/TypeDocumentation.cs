@@ -5,6 +5,8 @@ using XMLDoc2Markdown.Rendering;
 using XMLDoc2Markdown.Rendering.Sections;
 using XMLDoc2Markdown.Signatures;
 using XMLDoc2Markdown.Utils;
+using System;
+using System.Collections.Generic;
 
 namespace XMLDoc2Markdown;
 

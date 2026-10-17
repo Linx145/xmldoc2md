@@ -1,4 +1,5 @@
 namespace XMLDoc2Markdown.Signatures;
+using System.Collections.Generic;
 
 /// <summary>
 /// Token-based signature composer. Modifiers append tokens; ToString joins them

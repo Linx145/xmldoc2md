@@ -1,4 +1,5 @@
 namespace XMLDoc2Markdown.Signatures.Modifiers;
+using System;
 
 /// <summary>
 /// Emits the class/struct/interface/enum keyword. For class, also emits

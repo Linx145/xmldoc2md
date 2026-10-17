@@ -1,4 +1,7 @@
 namespace XMLDoc2Markdown.Signatures.Modifiers;
+using System;
+using System.Linq;
+using System.Collections.Generic;
 
 internal static class BaseListModifier
 {

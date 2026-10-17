@@ -1,6 +1,9 @@
 using Markdown;
 using XMLDoc2Markdown.Linking;
 
+using System;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering;
 
 internal static class BackButtonRenderer

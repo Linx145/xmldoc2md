@@ -1,4 +1,5 @@
 using XMLDoc2Markdown.XmlDocId;
+using System;
 
 namespace XMLDoc2Markdown.Linking;
 

@@ -3,6 +3,8 @@ using Markdown;
 using XMLDoc2Markdown.Signatures;
 using XMLDoc2Markdown.Utils;
 
+using System;
+
 namespace XMLDoc2Markdown.Linking;
 
 /// <summary>

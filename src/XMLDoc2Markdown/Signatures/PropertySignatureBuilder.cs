@@ -1,6 +1,8 @@
 using System.Reflection;
 using XMLDoc2Markdown.Members;
 using XMLDoc2Markdown.Signatures.Modifiers;
+using System;
+using System.Linq;
 
 namespace XMLDoc2Markdown.Signatures;
 

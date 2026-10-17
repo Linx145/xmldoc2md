@@ -1,5 +1,6 @@
 using System.Reflection;
 using System.Runtime.Loader;
+using System;
 
 namespace XMLDoc2Markdown.Utils;
 

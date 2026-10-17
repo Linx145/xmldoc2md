@@ -3,6 +3,9 @@ using System.Xml.Linq;
 using Markdown;
 using XMLDoc2Markdown.Signatures;
 
+using System;
+using System.Collections.Generic;
+
 namespace XMLDoc2Markdown.Rendering.Sections;
 
 internal sealed class PropertySectionRenderer : MemberSectionRenderer<PropertyInfo>

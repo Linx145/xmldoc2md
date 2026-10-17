@@ -1,6 +1,10 @@
 using System.Reflection;
 using System.Text;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Signatures;
 
 internal static class DisplayNameRenderer

@@ -4,6 +4,10 @@ using Markdown;
 using XMLDoc2Markdown.Signatures;
 using XMLDoc2Markdown.Signatures.Modifiers;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering.Sections;
 
 /// <summary>

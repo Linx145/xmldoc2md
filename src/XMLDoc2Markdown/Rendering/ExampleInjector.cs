@@ -3,6 +3,8 @@ using Markdown;
 using XMLDoc2Markdown.Utils;
 using XMLDoc2Markdown.XmlDocId;
 
+using System.IO;
+
 namespace XMLDoc2Markdown.Rendering;
 
 internal sealed class ExampleInjector

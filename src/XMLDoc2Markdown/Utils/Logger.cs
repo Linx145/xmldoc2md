@@ -1,4 +1,5 @@
 namespace XMLDoc2Markdown.Utils;
+using System;
 
 internal static class Logger
 {

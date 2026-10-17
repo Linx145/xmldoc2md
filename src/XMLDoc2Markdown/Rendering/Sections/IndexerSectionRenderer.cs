@@ -3,6 +3,10 @@ using System.Xml.Linq;
 using Markdown;
 using XMLDoc2Markdown.Signatures;
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 namespace XMLDoc2Markdown.Rendering.Sections;
 
 internal sealed class IndexerSectionRenderer : MemberSectionRenderer<PropertyInfo>

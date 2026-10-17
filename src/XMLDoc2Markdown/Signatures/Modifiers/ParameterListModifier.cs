@@ -1,6 +1,9 @@
 using System.Globalization;
 using System.Reflection;
 using System.Text;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace XMLDoc2Markdown.Signatures.Modifiers;
 
