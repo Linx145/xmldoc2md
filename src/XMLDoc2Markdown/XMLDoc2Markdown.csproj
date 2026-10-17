@@ -13,26 +13,6 @@
     
     <Authors>Charles de Vandière</Authors>
     <Copyright>© 2026 Charles de Vandière</Copyright>
-    <PackageId>XMLDoc2Markdown</PackageId>
-    <Product>XMLDoc2Markdown</Product>
-    <Title>XMLDoc2Markdown</Title>
-    <Description>Tool to generate markdown from C# XML documentation.</Description>
-    <Summary>Tool to generate markdown from C# XML documentation.</Summary>
-    <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageProjectUrl>https://charlesdevandiere.github.io/xmldoc2md</PackageProjectUrl>
-    <PackageReadmeFile>README.md</PackageReadmeFile>
-    <PackageTags>Markdown;XMLDocumentation</PackageTags>
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/charlesdevandiere/xmldoc2md</RepositoryUrl>
-    
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols>
-    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TF_BUILD)' == 'true'">
-    <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
 
   <ItemGroup>
@@ -46,7 +26,6 @@
 
   <ItemGroup>
     <PackageReference Include="MarkdownBuilder" Version="1.0.0" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.203" PrivateAssets="All" />
     <PackageReference Include="System.CommandLine" Version="2.0.7" />
   </ItemGroup>
 

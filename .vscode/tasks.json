@@ -4,25 +4,10 @@
         {
             "label": "build",
             "command": "dotnet",
-            "dependsOn": "build sample",
             "type": "process",
             "args": [
                 "build",
-                "${workspaceFolder}/src/XMLDoc2Markdown/XMLDoc2Markdown.csproj",
-                "--output",
-                "${workspaceFolder}/out/XMLDoc2Markdown"
-            ],
-            "problemMatcher": "$msCompile"
-        },
-        {
-            "label": "build sample",
-            "command": "dotnet",
-            "type": "process",
-            "args": [
-                "build",
-                "${workspaceFolder}/sample/MyClassLib/MyClassLib.csproj",
-                "--output",
-                "${workspaceFolder}/out/sample"
+                "${workspaceFolder}/src/XMLDoc2Markdown/XMLDoc2Markdown.csproj"
             ],
             "problemMatcher": "$msCompile"
         }

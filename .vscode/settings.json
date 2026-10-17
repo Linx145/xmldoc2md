@@ -1,7 +1,25 @@
 {
-  "yaml.format.singleQuote": true,
-  "sonarlint.connectedMode.project": {
-    "connectionId": "charlesdevandiere",
-    "projectKey": "charlesdevandiere_xmldoc2md"
-  }
+    "telemetry.feedback.enabled": false,
+    "chat.extensionTools.enabled": false,
+    "files.exclude": {
+        // Change to false to see .git folder 
+        "**/.git": true,
+        "**/__pycache__": true
+    },
+    "chat.disableAIFeatures": true,
+    "chat.agent.codeBlockProgress": false,
+    "chat.agent.enabled": false,
+    "chat.agent.thinking.terminalTools": false,
+    "chat.agent.thinking.generateTitles": false,
+    "chat.agentsControl.enabled": "hidden",
+    "chat.useAgentSkills": false,
+    "chat.useAgentsMdFile": false,
+    "chat.implicitContext.suggestedContext": false,
+    "chat.viewSessions.enabled": false,
+    "chat.tools.todos.showWidget": false,
+    "chat.agent.maxRequests": 0,
+    "workbench.settings.showAISearchToggle": false,
+    "explorer.autoReveal": false,
+    "explorer.copyRelativePathSeparator": "/",
+    "dotnet.defaultSolution": "XMLDoc2Markdown.slnx"
 }
