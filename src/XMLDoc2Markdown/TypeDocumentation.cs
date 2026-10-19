@@ -25,6 +25,12 @@ internal sealed class TypeDocumentation
     private readonly RenderingContext context;
     private readonly MarkdownDocument document = new();
 
+    internal TypeDocumentation(RenderingContext context)
+    {
+        ArgumentNullException.ThrowIfNull(context);
+        
+        this.context = context;
+    }
     internal TypeDocumentation(Assembly assembly, Type type, XmlDocumentation documentation, TypeDocumentationOptions? options = null)
     {
         ArgumentNullException.ThrowIfNull(assembly);

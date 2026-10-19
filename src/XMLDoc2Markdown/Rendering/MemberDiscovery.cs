@@ -45,7 +45,7 @@ internal sealed class MemberDiscovery
     {
         HashSet<string> eventNames = new(this.GetEvents().Select(e => e.Name), StringComparer.Ordinal);
         return this.type.GetFields(AllInstanceAndStatic)
-            .Where(f => !f.Name.EndsWith(BackingFieldName))
+            .Where(f => !f.Name.EndsWith(BackingFieldName) && f.Name != "self" && f.Name != "selfDataHandle")
             .Where(f => !eventNames.Contains(f.Name))
             .Where(f => f.GetAccessibility() >= this.minAccessibility)
             .ToArray();

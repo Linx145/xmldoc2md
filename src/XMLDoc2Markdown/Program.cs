@@ -12,6 +12,11 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using XMLDoc2Markdown.Signatures.Modifiers;
+using System.Xml.Linq;
+using System.Text;
+using XMLDoc2Markdown.Signatures;
+using XMLDoc2Markdown.XmlDocId;
 
 namespace XMLDoc2Markdown;
 
@@ -94,6 +99,10 @@ internal class Program
         {
             Description = "Exclude bindgen-generated native import files"
         };
+        Option<string?> generateSidebarOption = new("--generate-sidebar")
+        {
+            Description = "Generate a markdown sidebar for the documentation, using the argument as the header."
+        };
 
         RootCommand rootCommand = new(description: "Tool to generate markdown from C# XML documentation.")
         {
@@ -109,7 +118,8 @@ internal class Program
             structureOption,
             frontMatterOption,
             frontMatterFieldOption,
-            ignoreBindgenImportsOption
+            ignoreBindgenImportsOption,
+            generateSidebarOption
         };
 
         rootCommand.SetAction(parseResult =>
@@ -144,6 +154,7 @@ internal class Program
                     _ => null,
                 };
                 bool ignoreBindgenImports = parseResult.GetValue(ignoreBindgenImportsOption);
+                string? generateSidebarIcon = parseResult.GetValue(generateSidebarOption);
                 FrontMatterPreset? frontMatter = parseResult.GetValue(frontMatterOption) switch
                 {
                     "none" => FrontMatterPreset.None,
@@ -187,6 +198,12 @@ internal class Program
                 XmlDocumentation documentation = new(src);
                 Logger.Info($"Generation started: Assembly: {assemblyName}");
 
+                StringBuilder? sidebar = null;
+                if (generateSidebarIcon != null)
+                {
+                    sidebar = new StringBuilder();
+                    sidebar.AppendLine($"<img src=\"{generateSidebarIcon}\"></img>");
+                }
                 IMarkdownDocument indexPage = new MarkdownDocument().AppendHeader(assemblyName, 1);
 
                 Type?[] loadedTypes;
@@ -200,24 +217,44 @@ internal class Program
                     loadedTypes = ex.Types;
                 }
 
-                IEnumerable<Type> types = loadedTypes
+                IEnumerable<TypeContextPair> types = loadedTypes
                     .Where(type => type is not null)
                     .Select(type => type!)
-                    .Where(type => (type.IsPublic || type.IsNestedPublic) && !typeof(Delegate).IsAssignableFrom(type));
+                    .Where(type => (type.IsPublic || type.IsNestedPublic) && !typeof(Delegate).IsAssignableFrom(type))
+                    .Select(type => new TypeContextPair(type, new RenderingContext(assembly, type, documentation, options)))
+                    .Where(pair => pair.context != null);
                 
-                IEnumerable<IGrouping<string?, Type>> typesByNamespace = types.GroupBy(type => type.Namespace).OrderBy(g => g.Key);
-                foreach (IGrouping<string?, Type> namespaceTypes in typesByNamespace)
+                IEnumerable<IGrouping<string?, TypeContextPair>> typesByCategory = types.GroupBy(pair =>
                 {
-                    indexPage.AppendHeader(namespaceTypes.Key ?? "No namespace", 2);
-
-                    foreach (Type type in namespaceTypes.OrderBy(x => x.Name))
+                    var memberDocElement = pair.context.GetMemberDoc(pair.type);
+                    
+                    IEnumerable<XNode>? nodes = memberDocElement?.Element("category")?.Nodes();
+                    if (nodes != null)
                     {
+                        var first = nodes.FirstOrDefault();
+                        if (first is not null and XText text)
+                        {
+                            return text.Value;
+                        }
+                    }
+                    return pair.type.Namespace;
+                }).OrderBy(g => g.Key);
+
+                foreach (IGrouping<string?, TypeContextPair> categorisedTypes in typesByCategory)
+                {
+                    sidebar?.AppendLine($"- {categorisedTypes.Key}");
+                    indexPage.AppendHeader(categorisedTypes.Key ?? "No category", 2);
+
+                    foreach (TypeContextPair pair in categorisedTypes.OrderBy(x => x.type.Name))
+                    {
+                        Type type = pair.type;
                         if (ignoreBindgenImports && (type.Name.EndsWith("Imports") || type.Name == "ModuleLoadFuncs"))
                         {
                             continue;
                         }
 
                         string fileName = type.GetDocsFileName(options.Structure);
+                        sidebar?.AppendLine($"  - [{type.GetDisplayName(true).FormatChevrons()}](api-reference/{fileName})");
                         Logger.Info($"  {fileName}.md");
 
                         indexPage.AppendParagraph(type.GetDocsLink(assembly, options.Structure, noExtension: options.NoExtension, noPrefix: options.NoPrefix));
@@ -234,7 +271,7 @@ internal class Program
 
                             File.WriteAllText(
                                 filePath,
-                                new TypeDocumentation(assembly, type, documentation, options).ToString()
+                                new TypeDocumentation(pair.context).ToString()
                             );
                             succeeded++;
                         }
@@ -244,6 +281,13 @@ internal class Program
                             failed++;
                         }
                     }
+                }
+
+                if (sidebar != null)
+                {
+                    File.WriteAllText(
+                        Path.Combine(@out, "_sidebar.md"),
+                        sidebar.ToString());
                 }
 
                 File.WriteAllText(

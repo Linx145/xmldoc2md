@@ -16,7 +16,9 @@
                 "${workspaceFolder}/../eternity-works-docs/api-reference",
                 "--structure",
                 "tree",
-                "--ignore-bindgen-imports"
+                "--ignore-bindgen-imports",
+                "--generate-sidebar",
+                "assets/EternityWorksFull.png"
             ],
             "cwd": "${workspaceFolder}/src/XMLDoc2Markdown/bin/Debug/net10.0",
             "console": "internalConsole",
