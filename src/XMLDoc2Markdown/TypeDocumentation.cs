@@ -7,6 +7,7 @@ using XMLDoc2Markdown.Signatures;
 using XMLDoc2Markdown.Utils;
 using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace XMLDoc2Markdown;
 
@@ -55,7 +56,8 @@ internal sealed class TypeDocumentation
             BackButtonRenderer.Write(this.document, type, options.Structure, BackButtonRenderer.Position.Top);
         }
 
-        this.document.AppendHeader(type.GetDisplayName().FormatChevrons(), 1);
+        string typeNameFormatted = type.GetDisplayName().FormatChevrons();
+        this.document.AppendHeader(typeNameFormatted, 1);
 
         if (type.Namespace != null)
         {
@@ -73,6 +75,15 @@ internal sealed class TypeDocumentation
         this.document.AppendCode("csharp", type.GetSignature(full: true));
         parameters.WriteTypeParameters(this.document, type, typeDocElement);
         InheritanceRenderer.Write(this.document, this.context);
+        if (options.SummaryPatchesSource != null)
+        {
+            string path = Path.Combine(options.SummaryPatchesSource, typeNameFormatted + ".md");
+            if (File.Exists(path))
+            {
+                string all = File.ReadAllText(path);
+                this.document.AppendParagraph(all);
+            }
+        }
         this.WriteRemarks(converter, typeDocElement);
 
         if (type.IsEnum)

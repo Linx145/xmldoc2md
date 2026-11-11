@@ -18,7 +18,9 @@
                 "tree",
                 "--ignore-bindgen-imports",
                 "--generate-sidebar",
-                "assets/EternityWorksFull.png"
+                "assets/EternityWorksFull.png",
+                "--summary-patches",
+                "${workspaceFolder}/../eternity-works-docs/patch"
             ],
             "cwd": "${workspaceFolder}/src/XMLDoc2Markdown/bin/Debug/net10.0",
             "console": "internalConsole",

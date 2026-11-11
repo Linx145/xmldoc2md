@@ -44,6 +44,10 @@ internal class Program
         {
             Description = "Path to the code examples to insert in the documentation"
         };
+        Option<string> summaryPatchesSourceOption = new("--summary-patches")
+        {
+            Description = "Path to a folder that contains content to be appended to after the summary category for the file of the same type name."
+        };
 
         Option<string> platformOption = new("--platform")
         {
@@ -110,6 +114,7 @@ internal class Program
             outputOption,
             indexPageNameOption,
             examplesPathOption,
+            summaryPatchesSourceOption,
             platformOption,
             linkExtensionOption,
             linkPrefixOption,
@@ -168,6 +173,7 @@ internal class Program
                 TypeDocumentationOptions options = new()
                 {
                     ExamplesDirectory = parseResult.GetValue(examplesPathOption),
+                    SummaryPatchesSource = parseResult.GetValue(summaryPatchesSourceOption),
                     NoExtension = platformSettings.NoExtension,
                     NoPrefix = platformSettings.NoPrefix,
                     BackButton = parseResult.GetValue(backButtonOption),

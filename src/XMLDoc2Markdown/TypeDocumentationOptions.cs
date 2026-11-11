@@ -19,4 +19,5 @@ internal class TypeDocumentationOptions
     /// and a custom key overrides a preset key of the same name.
     /// </summary>
     internal IReadOnlyList<KeyValuePair<string, string>> FrontMatterFields { get; set; } = [];
+    internal string? SummaryPatchesSource {get; set;}
 }
