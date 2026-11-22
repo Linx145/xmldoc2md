@@ -77,7 +77,7 @@ internal abstract class MemberSectionRenderer<T> where T : MemberInfo
 
         XElement? memberDocElement = this.Context.GetMemberDoc(member);
 
-        ObsoleteRenderer.Write(document, member, this.ObsoleteDefaultMessage);
+        //ObsoleteRenderer.Write(document, member, this.ObsoleteDefaultMessage);
         this.WriteSummary(document, memberDocElement);
         document.AppendCode("csharp", this.GetFullSignature(member));
 

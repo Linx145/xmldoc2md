@@ -70,7 +70,7 @@ internal sealed class TypeDocumentation
             Logger.Info("    (documented)");
         }
 
-        ObsoleteRenderer.Write(this.document, type, "This type is obsolete.");
+        //ObsoleteRenderer.Write(this.document, type, "This type is obsolete.");
         this.WriteSummary(converter, typeDocElement);
         this.document.AppendCode("csharp", type.GetSignature(full: true));
         parameters.WriteTypeParameters(this.document, type, typeDocElement);

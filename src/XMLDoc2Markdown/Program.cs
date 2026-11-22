@@ -193,7 +193,7 @@ internal class Program
                     FrontMatterFields = ParseFrontMatterFields(parseResult.GetValue(frontMatterFieldOption))
                 };
                 int succeeded = 0;
-                int failed = 0;
+                List<string> failedTypes = new List<string>();
 
                 Directory.CreateDirectory(@out);
 
@@ -283,8 +283,9 @@ internal class Program
                         }
                         catch (Exception exception)
                         {
-                            Logger.Error(exception.Message);
-                            failed++;
+                            failedTypes.Add($" - {type.Name}: {exception.Message}");
+                            //Logger.Error(exception.Message);
+                            //failed++;
                         }
                     }
                 }
@@ -300,7 +301,11 @@ internal class Program
                     Path.Combine(@out, $"{indexPageName}.md"),
                     FrontMatterRenderer.ForIndex(assemblyName, indexPageName, options) + indexPage.ToString());
 
-                Logger.Info($"Generation: {succeeded} succeeded, {failed} failed");
+                Logger.Info($"Generation: {succeeded} succeeded, {failedTypes.Count} failed");
+                for (int i = 0; i < failedTypes.Count; i++)
+                {
+                    Logger.Error(failedTypes[i]);
+                }
                 return 0;
             }
             catch (Exception ex)
